@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/MinGW/include/c++/x86_64-w64-mingw32",  // Path to MinGW's C++ headers
+                "C:/MinGW/include/c++/x86_64-w64-mingw32/7.3.0",  // Path to specific version headers
+                "C:/MinGW/lib/gcc/x86_64-w64-mingw32/7.3.0/include",  // Path to GCC includes
+                "C:/MinGW/include/c++/backward"  // Optional backward compatibility includes
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",  // Path to GCC compiler
+            "cStandard": "c11",
+            "cppStandard": "gnu++14",  // You can change this to another C++ standard (e.g., c++17, c++20)
+            "intelliSenseMode": "windows-gcc-x86"
+        }
+    ],
+    "version": 4
+}
