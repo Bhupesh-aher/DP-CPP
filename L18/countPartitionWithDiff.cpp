@@ -124,7 +124,6 @@ int countPartition2(int n, int d, vector<int> &nums){
 // Space optimization
 
 int subsetSumToK3(int n, int k, vector<int> &nums) {
-    vector<vector<int>> dp(n, vector<int>(k + 1, 0));
     vector<int> prev(k + 1, 0);
     if(nums[0] == 0) prev[0] = 2;
     else prev[0] = 1;
@@ -132,7 +131,7 @@ int subsetSumToK3(int n, int k, vector<int> &nums) {
 
     for(int ind = 1; ind < n; ind ++){
         vector<int> curr(k + 1, 0);
-        for(int target = 1; target <= k; target ++){
+        for(int target = 0; target <= k; target ++){
             int notPick = prev[target];
             int pick = 0;
             if(nums[ind] <= target){
