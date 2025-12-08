@@ -38,7 +38,35 @@ int minDistance(string word1, string word2) {
 
 
 
+// Space optimization
 
+int LCS4(int n, int m, string s1, string s2) {
+    vector<int> prev(m + 1, 0);
+
+    for(int j = 0; j <= m; j++) prev[j] = 0;
+
+    for(int i = 1; i <= n; i++){
+        vector<int> curr(m + 1, 0);
+        for(int j = 1; j <= m; j++){
+            if(s1[i - 1] == s2[j - 1]){
+                curr[j] = 1 + prev[j - 1];
+            }
+
+            else curr[j] = 0 + max(curr[j - 1], prev[j]);
+        }
+        prev = curr;
+    }
+    return prev[m];
+    }
+int minDistance2(string word1, string word2) {
+    int n = word1.size();
+    int m = word2.size();
+    return n + m - 2 * (LCS4(n, m, word1, word2));
+}
+
+
+// TC - O(N * M) 
+// SC - O 2(N)     prev and curr
 
 
 
