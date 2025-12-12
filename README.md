@@ -1,1 +1,1 @@
-DP 
+dynamic programming
