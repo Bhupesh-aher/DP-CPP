@@ -154,29 +154,6 @@ int minDistance4(string s, string t) {
 
 
 
-// Space optimization - Single Array Space Optimised 
-
-int numDistinct(string s, string t) {
-    int n = s.size();
-    int m = t.size();
-    vector<double> prev(m + 1, 0);
-
-    prev[0] = 1;
-
-    for(int i = 1; i <=n; i++){
-        for(int j = m; j >=1; j--){
-            if(s[i-1] == t[j-1]){
-                prev[j] = prev[j-1] + prev[j];
-            }
-        }
-    }
-    return (int)prev[m];
-}
-
-
-// TC - O(N * W) 
-// SC - O(W)     prev 
-
 
 int main(){
     string word1 = "horse";
