@@ -120,6 +120,98 @@ bool isMatch2(string text, string pattern) {
 }
 
 
+// Tabulation 
+
+ bool isMatch3(string text, string pattern) {
+    int n = pattern.size();
+    int m = text.size();
+    vector<vector<bool>> dp(n + 1, vector<bool>(m + 1, false));
+
+    dp[0][0] = true;    // 1st base case
+    for(int j = 1; j <=m; j++) dp[0][j] = false;        // 2nd base case
+
+    for(int i = 1; i <=n; i++){     // 3rd base case
+        bool fl = true;
+        for(int ind = 1; ind <= i; ind++){
+            if(pattern[ind - 1] != '*') {
+                fl = false;
+                break;
+            }
+        }
+        dp[i][0] = fl;
+    }
+
+    for(int i = 1; i <=n; i++){
+        for(int j = 1; j <= m; j++){
+            if(pattern[i - 1] == text[j - 1] || pattern[i - 1] == '?'){
+                dp[i][j] = dp[i-1][j-1];
+            }
+            else if(pattern[i - 1] == '*'){
+                dp[i][j] = dp[i-1][j] | dp[i][j-1];
+            }
+            else dp[i][j] = false;
+        }
+    }
+    return dp[n][m];
+}
+
+// TC - O(N * M) 
+// SC - O(N * M)      dp
+
+
+
+// Now we can do space optimization here as well just like we did in all previous problem 
+// the only thing is this time because of our base cases writting space optimization for base case is bit tricky
+// and easy in the for loops, do the same thing we did previosly
+// but just tricky to write space optimization in the base cases 
+
+
+// Space optimization
+
+ bool isMatch4(string text, string pattern) {
+    int n = pattern.size();
+    int m = text.size();
+    vector<bool> prev(m + 1, false), curr(m + 1, false);
+
+    prev[0] = true;    // 1st base case
+    for(int j = 1; j <=m; j++) prev[j] = false;        // 2nd base case
+
+
+    for(int i = 1; i <=n; i++){
+        // curr is the current row's column
+        // and that curr's 0th row has to be assigned everytime
+
+        bool fl = true;
+        for(int ind = 1; ind <= i; ind++){
+            if(pattern[ind - 1] != '*') {
+                fl = false;
+                break;
+            }
+        }
+        // for every row
+        // you are assigning the 0th column's value
+        curr[0] = fl;
+
+        for(int j = 1; j <= m; j++){
+            if(pattern[i - 1] == text[j - 1] || pattern[i - 1] == '?'){
+                curr[j] = prev[j-1];
+            }
+            else if(pattern[i - 1] == '*'){
+                curr[j] = prev[j] | curr[j-1];
+            }
+            else curr[j] = false;
+        }
+        prev = curr;
+    }
+    return prev[m];
+}
+
+
+// TC - O(N * M) 
+// SC - O 2(N)     prev and curr
+
+
+
 
 
 int main(){
